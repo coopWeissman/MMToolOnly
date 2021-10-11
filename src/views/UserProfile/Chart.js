@@ -51,9 +51,9 @@ function Chart(props) {
       data.push(
         {
           "name": age,
-          "Principal": currencyFormat(intBar),
+          "Principal": intBar,
           "uv": 1.5,
-          "Amount(US Dollars)": currencyFormat(savings-intBar),
+          "Amount(US Dollars)": savings-intBar,
         }
       )
         amount= Number(amount)
