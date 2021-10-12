@@ -128,6 +128,12 @@ const [interest, setInterest] = useInterest();
   if(retirement> 100 || retirement<age){
     alert("Invalid Response: Retirement Age must be greater than current age and less than 100")
   }
+  if(interest> 50){
+    alert("Invalid Response: Interest rate is not realistic for longterm investment")
+  }
+  if(interest< 0){
+    alert("Invalid Response: Cannot calculate negative interest")
+  }
   // display based on feilds that were not filled
   if (income<1 ){
     // setPieChart(true)
@@ -144,6 +150,7 @@ const [interest, setInterest] = useInterest();
     setPieChart(true)
     console.log("holo")
   }
+  
   };;
 
   return (
@@ -292,6 +299,7 @@ const [interest, setInterest] = useInterest();
     </Grid> */}
     </Grid>
     </GridContainer>
+    <iframe width="540" height="520" src="https://b9677850.sibforms.com/serve/MUIEAPLIZQsg9BKa2phhLTaA0kl0zVqignkCuy8rQ5zKs__UTeDGwwvevaaU_QmR-LgusMjcXP1oCAKR7qaMYNc9UMrqTg1UuBzSrz5U1WHlq0WvYKHYLylitO3qeKAxcElADB_dmNHoGEDp00Mb5R2ad-0NzUsRHEp04qE0erNxcAR3j55Olb9R0K5E-VQknsk1PGVnINiDy1sa" frameborder="0" scrolling="auto" allowfullscreen style={{display: 'block', marginLeft: "auto",marginRight: "auto", maxWidth: "100%"}}></iframe>
     </div>
 
 
