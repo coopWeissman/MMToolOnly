@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     overflow: "hidden",
+    margin: "5%",
     padding: theme.spacing(0, 1),
   },
   card: {
@@ -53,6 +54,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     alignItems: "center",
     display: 'flex',
+  },
+  MobileAdjust: {
+    width: "100%",
+    marginRight: "0px",
+    paddinfLeft: "-30px",
   }
 }));
 
@@ -83,42 +89,56 @@ const [interest, setInterest] = useInterest();
  const [income, setIncome] = useState();
  const [expenses, setExpenses] = useState();
  const [retirement, setRetirement] = useState();
- const [savings, setSavings] = useState();
+ const [savings, setSavings] = useState(0);
  const [final, setFinal] = useState();
  const [collapse, setCollapse] = useState(true);
  const [pieChart, setPieChart] = useState(true);
  const spending = income-final-expenses;
  const classes = useStyles();
 
+ function currencyFormat(num) {
+   return '$' + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
     
   function calculate() {
   const result = (interest/12*(amount-savings*(1+interest/12)**((retirement-age)*12)))/((1+interest/12)**((retirement-age)*12)-1).toFixed(2)
     // (r/12*(1000000-I*(1+r/12)**(t*12)))/((1+r/12)**(t*12)-1)
     const test = (income-savings)
-
-    setPieChart(false)
-    setFinal(result.toFixed(2)) 
-  if (result>0){
+    
+    setFinal(result) 
+    
+  if (Number(result)<0){
+    alert("Congratulations!! You don't need to contribute any money to your account to reach your goals. You can even take out $"+(-1*result.toFixed(2))+" per month and still be able to reach your goals. If you would like to have more money when you retire make your goal higher. Also if you would like to retire sooner, make your ideal retirement age lower!")
+  } 
+  if (Number(result)>0){
     setCollapse(false)
-  }
+    setPieChart(false)
+    console.log(income)
+  } 
   // invalid response 
-  else if(age< 0 || age>100){
+  if(age< 0 || age>100){
     alert("Invalid Response: Current Age must be greater than 0 age and less than 100")
   }
-  else if(savings< 0){
+  if(savings< 0){
     alert("Invalid Response: System cannot acccept negative savings")
   }
-  else if(income< 0){
+  if(income< 0){
     alert("Invalid Response: system cannot accept negative income")
   }
-  else if(retirement> 100 || retirement<age){
+  if(retirement> 100 || retirement<age){
     alert("Invalid Response: Retirement Age must be greater than current age and less than 100")
+  }
+  if(interest> 50){
+    alert("Invalid Response: Interest rate is not realistic for longterm investment")
+  }
+  if(interest< 0){
+    alert("Invalid Response: Cannot calculate negative interest")
   }
   // display based on feilds that were not filled
   if (income<1 ){
-    setPieChart(true)
+    // setPieChart(true)
   }
-  if (Number(expenses)>Number(income) ){
+  if (Number(expenses)>Number(income)){
     setPieChart(true)
     console.log("howdy")
   }
@@ -128,14 +148,16 @@ const [interest, setInterest] = useInterest();
   }
   if (expenses<0){
     setPieChart(true)
+    console.log("holo")
   }
-  };
+  
+  };;
 
   return (
     <div className="root">
       <GridContainer>
         <GridItem xs={12} sm={12} md={15}>
-          <Card>
+          <Card className={classes.MobileAdjust}>
             <CardHeader color="primary">
               <h4 className={classes.cardTitleWhite}>Monthly Contribution Calculator</h4>
               <p className={classes.cardCategoryWhite}>Calculate how much money you need to invest per month to reach your longterm goals</p>
@@ -219,7 +241,7 @@ const [interest, setInterest] = useInterest();
               <GridContainer >
                 <GridItem xs={6} sm={6} md={6}>
                   <Button color="primary" onClick={calculate}>Calculate</Button>
-                  <Typography style={{display: collapse ? 'none' : '' }}>Monthly Contibution: ${final}</Typography>
+                  <Typography style={{display: collapse ? 'none' : '' }}>Monthly Contibution: {currencyFormat(Number(final))}</Typography>
                 </GridItem>
               </GridContainer>
             </CardBody>
@@ -243,7 +265,7 @@ const [interest, setInterest] = useInterest();
               <p className={classes.cardCategoryWhite}></p>
             </CardHeader>
             <CardBody>
-      <Stats income={income} spending={spending} expenses={expenses} final={final}/>
+      <Stats income={currencyFormat(Number(income))} spending={currencyFormat(Number(spending.toFixed(0)))} expenses={currencyFormat(Number(expenses))} final={currencyFormat(Number(final))}/>
     </CardBody>
     </Card>
     </GridContainer>
@@ -277,8 +299,8 @@ const [interest, setInterest] = useInterest();
     </Grid> */}
     </Grid>
     </GridContainer>
-    <iframe width="540" height="305" src="https://b9677850.sibforms.com/serve/MUIEAE6V7iLfE68QC9qpoFqNR5jdgmzZ_bRfYGYgSfp7rGFws7LOkca2Y4-9drz4dw0UwJn9cl8A8SX4oHJ5znB7S5mTjQcT9AkmBcJ-vaykjDFDvkrKKtgS_VgINvTmcWUanoylBKQyqPnt4WbiZ3iK0NP8jE_ea9yT3ofplru_EIUgysgTHD4BXQgIn1rN5S7dHIOU79xGzvH-" frameborder="0" scrolling="auto" allowfullscreen style={{display: 'block', marginLeft: "auto",marginRight: "auto", maxWidth: "100%"}}></iframe>
-    </div>
+
+    <iframe width="540" height="520" src="https://b9677850.sibforms.com/serve/MUIEAPLIZQsg9BKa2phhLTaA0kl0zVqignkCuy8rQ5zKs__UTeDGwwvevaaU_QmR-LgusMjcXP1oCAKR7qaMYNc9UMrqTg1UuBzSrz5U1WHlq0WvYKHYLylitO3qeKAxcElADB_dmNHoGEDp00Mb5R2ad-0NzUsRHEp04qE0erNxcAR3j55Olb9R0K5E-VQknsk1PGVnINiDy1sa" frameborder="0" scrolling="auto" allowfullscreen style={{display: 'block', marginLeft: "auto",marginRight: "auto", maxWidth: "100%"}}></iframe>
 
 
   );

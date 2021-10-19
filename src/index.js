@@ -33,5 +33,6 @@ ReactDOM.render(
       <Redirect from="/" to="/admin/dashboard" />
     </Switch>
   </HashRouter>,
-  document.getElementById("root")
-);
+  document.getElementById("root"))
+  
+;
