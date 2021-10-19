@@ -137,7 +137,7 @@ const [interest, setInterest] = useInterest();
         <GridItem xs={12} sm={12} md={15}>
           <Card>
             <CardHeader color="primary">
-              <h4 className={classes.cardTitleWhite}>onthly Contribution Calculator</h4>
+              <h4 className={classes.cardTitleWhite}>Monthly Contribution Calculator</h4>
               <p className={classes.cardCategoryWhite}>Calculate how much money you need to invest per month to reach your longterm goals</p>
             </CardHeader>
             <CardBody>
@@ -277,6 +277,7 @@ const [interest, setInterest] = useInterest();
     </Grid> */}
     </Grid>
     </GridContainer>
+    <iframe width="540" height="305" src="https://b9677850.sibforms.com/serve/MUIEAE6V7iLfE68QC9qpoFqNR5jdgmzZ_bRfYGYgSfp7rGFws7LOkca2Y4-9drz4dw0UwJn9cl8A8SX4oHJ5znB7S5mTjQcT9AkmBcJ-vaykjDFDvkrKKtgS_VgINvTmcWUanoylBKQyqPnt4WbiZ3iK0NP8jE_ea9yT3ofplru_EIUgysgTHD4BXQgIn1rN5S7dHIOU79xGzvH-" frameborder="0" scrolling="auto" allowfullscreen style={{display: 'block', marginLeft: "auto",marginRight: "auto", maxWidth: "100%"}}></iframe>
     </div>
 
 
