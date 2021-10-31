@@ -241,12 +241,19 @@ const [interest, setInterest] = useInterest();
               <GridContainer >
                 <GridItem xs={6} sm={6} md={6}>
                   <Button color="primary" onClick={calculate}>Calculate</Button>
-                  <Typography style={{display: collapse ? 'none' : '' }}>Monthly Contibution: {currencyFormat(Number(final))}</Typography>
                 </GridItem>
               </GridContainer>
             </CardBody>
           </Card>
         </GridItem>
+        <Card style={{display: collapse ? 'none' : '' }}>
+            <CardHeader color="primary">
+              <h4 className={classes.cardTitleWhite}>Contribution</h4>
+            </CardHeader>
+            <CardBody>
+            <Typography style={{display: collapse ? 'none' : '', fontSize: "30px", justifyContent: "center", alignItems: "center"}}>You need to invest <span style={{fontSize: "35px", backgroundColor: '#90ee90'}}>{currencyFormat(Number(final))}</span> per month in order to save <span style={{fontSize: "35px", backgroundColor: '#90ee90'}}>{currencyFormat(Number(amount))}</span></Typography>
+    </CardBody>
+    </Card>
       </GridContainer>
     
     <GridContainer >
